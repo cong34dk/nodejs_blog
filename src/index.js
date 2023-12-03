@@ -4,6 +4,8 @@ const { engine } = require('express-handlebars')
 const path = require('path')
 const { extname } = require('path')
 
+const route = require('./routes')
+
 const app = express()
 const port = 3000
 
@@ -24,22 +26,9 @@ app.engine('.hbs', engine({
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname,'resources\\views'))
 
-app.get('/home', (req, res) => {
-  res.render('home')
-})
+//route init
+route(app)
 
-app.get('/news', (req, res) => {
-  res.render('news')
-})
-
-app.get('/search', (req, res) => {
-  res.render('search')
-})
-
-app.post('/search', (req, res) => {
-  console.log(req.body)
-  res.send('')
-})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
